@@ -1,27 +1,42 @@
+import { environment } from 'src/environments/environment';
+import { setTitle, setAuthentication } from 'src/app/actions/app.actions';
 import {
   ActionReducerMap,
   MetaReducer,
   createReducer,
   on
 } from '@ngrx/store';
-import { environment } from '../../environments/environment';
 import {
   AppState,
   TitleActionProps,
-  UsernameActionProps,
-  AuthenticationActionProps
-} from '../models/app-types.model';
-import { setTitle, setUsername, setAuthentication } from '../actions/app.actions';
+  AuthenticationActionProps,
+  AppStateKey,
+  PeliculasStateKey
+} from 'src/app/models/app.model';
+import {
+  PeliculasState,
+  SetFavoritesActionProps,
+  AddFavoriteActionProps,
+  RemoveFavoriteActionProps,
+  SetSearchResultsActionProps
+} from 'src/app/models/peliculas.model';
+import {
+  setFavorites,
+  addFavorite,
+  removeFavorite,
+  setSearchResults,
+  setPeliState
+} from '../actions/peliculas.actions';
 
 export interface State {
   appState: AppState,
+  peliculasState: PeliculasState
 }
-const AppStateKey = 'AppState';
 
 const getInitialAppState: () => AppState = () => {
-  const initialState = { title: 'Peliculas', user: null, apikey: null, authenticated: false };
+  const initialState: AppState = { title: 'Peliculas', username: null, apikey: null, authenticated: false };
   try {
-    const appstate = localStorage.getItem(AppStateKey)
+    const appstate = sessionStorage.getItem(AppStateKey)
     return JSON.parse(appstate) || initialState;
   } catch (error) {
     console.warn(`Unable to parse previous state: ${error.message}`);
@@ -31,14 +46,48 @@ const getInitialAppState: () => AppState = () => {
 
 const appStateReducer = createReducer(
   getInitialAppState(),
-  on(setTitle, (state, { title }: TitleActionProps) => ({ ...state, title: title })),
-  on(setUsername, (state, { username }: UsernameActionProps) => ({ ...state, username })),
-  on(setAuthentication, (state, authprops: AuthenticationActionProps) => ({ ...state, ...authprops }))
+  on(
+    setTitle,
+    (state, titleProps: TitleActionProps) => ({ ...state, ...titleProps })
+  ),
+  on(
+    setAuthentication,
+    (state, authprops: AuthenticationActionProps) => ({ ...state, ...authprops })
+  )
 );
 
+const peliculasStateReducer = createReducer(
+  { favoritos: [], resultados: [] },
+  on(
+    setPeliState,
+    (state, peliState: PeliculasState) =>
+      ({ ...state, ...peliState })
+  ),
+  on(
+    setFavorites,
+    (state, { favoritos }: SetFavoritesActionProps) =>
+      ({ ...state, favoritos: [...favoritos] })
+  ),
+  on(
+    setSearchResults,
+    (state, { resultados }: SetSearchResultsActionProps) =>
+      ({ ...state, resultados: [...resultados] })
+  ),
+  on(
+    addFavorite,
+    (state, { favorito }: AddFavoriteActionProps) =>
+      ({ ...state, favoritos: [...state.favoritos, favorito] })
+  ),
+  on(
+    removeFavorite,
+    (state, { favorito }: RemoveFavoriteActionProps) =>
+      ({ ...state, favoritos: state.favoritos.filter(f => f.imdbID !== favorito.imdbID) })
+  )
+)
 
 export const reducers: ActionReducerMap<State> = {
-  appState: appStateReducer
+  appState: appStateReducer,
+  peliculasState: peliculasStateReducer
 };
 
 
