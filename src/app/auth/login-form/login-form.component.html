@@ -1,0 +1,27 @@
+<form class="box" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <section class="field">
+    <label for="email" class="label">
+      Correo Electr&#243;nico
+    </label>
+    <div class="control">
+      <input placeholder="Correo Electr&#243;nico" type="email"
+        [ngClass]="{'input': true, 'is-danger': (email.invalid && (email.dirty || email.touched)) }"
+        formControlName="email">
+    </div>
+  </section>
+  <section class="field">
+    <label for="password" class="label">
+      Contrase&#241;a
+    </label>
+    <div class="control">
+      <input placeholder="Contrase&#241;a" type="password"
+        [ngClass]="{'input': true, 'is-danger': (password.invalid && (password.dirty || password.touched)) }"
+        formControlName="password">
+    </div>
+  </section>
+  <section class="field">
+    <div class="control center">
+      <button type="submit" class="button is-link" [disabled]="loginForm.invalid">Iniciar Sesi&#243;n</button>
+    </div>
+  </section>
+</form>
