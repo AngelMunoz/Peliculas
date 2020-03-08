@@ -1,0 +1,9 @@
+<form class="search-bar-form" [formGroup]="searchForm">
+  <input class="input search-field" type="search" placeholder="Titulo a Buscar..." formControlName="query" />
+  <div class="select select-field">
+    <select placeholder="Buscar Por..." formControlName="searchType">
+      <option value="movie" selected>Pelicula</option>
+      <option value="series">Serie</option>
+    </select>
+  </div>
+</form>

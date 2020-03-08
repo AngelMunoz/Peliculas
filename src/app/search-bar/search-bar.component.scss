@@ -1,0 +1,50 @@
+:host {
+  margin: 1em;
+  max-width: 768px;
+}
+
+.search-bar-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap:  wrap;
+  justify-content: space-between;
+  @media screen and (max-width: 625px) {
+    flex-direction: column;
+    align-content: space-between;
+  }
+}
+
+.search-field {
+  max-width: 220px;
+  margin-right: 1em;
+  @media screen and (max-width: 625px) {
+    margin-bottom: 1em;
+    width: 220px;
+  }
+  @media screen and (max-width: 425px) {
+    width: 150px;
+  }
+}
+
+.select-field {
+  margin-right: 1em;
+  @media screen and (max-width: 625px) {
+    margin-right: auto;
+    margin-bottom: 1em;
+    select {
+      width: 220px;
+    }
+  }
+  @media screen and (max-width: 425px) {
+    width: 150px;
+  }
+}
+
+.button-field {
+  @media screen and (max-width: 625px) {
+    width: 220px;
+  }
+  @media screen and (max-width: 425px) {
+    width: 150px;
+  }
+}
