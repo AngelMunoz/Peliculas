@@ -1,0 +1,11 @@
+<p>peliculas works!</p>
+<ul>
+  <li *ngFor="let favorito of favoritos">
+    {{favorito.Title}}
+  </li>
+</ul>
+<ul>
+  <li *ngFor="let resultado of resultados">
+    {{ resultado.Title }} <button (click)="agregarFavorito(resultado)">favorito</button>
+  </li>
+</ul>
