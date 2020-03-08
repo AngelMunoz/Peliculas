@@ -1,7 +1,8 @@
 <article>
   <nav class="navbar is-fixed-bottom is-dark">
     <section class="navbar-brand">
-      <a [routerLink]="'/'" class="navbar-item">Palabras</a>
+      <a [routerLink]="'/'" class="navbar-item">Peliculas</a>
+      <app-search-bar *ngIf="appState.authenticated" (onSearch)="onSearch($event)"></app-search-bar>
       <a role="button" [ngClass]="hamburgerBtnClasses" (click)="toggleMenu()">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -9,9 +10,14 @@
       </a>
     </section>
     <div [ngClass]="navbarMenuClasses">
-      <section class="navbar-start">
-
-      </section>
+      <div class="navbar-end">
+        <a *ngIf="!appState.authenticated" [routerLink]="'/auth'" class="navbar-item">
+          Iniciar Sesi&#243;n
+        </a>
+        <a *ngIf="appState.authenticated" role="button" class="navbar-item" (click)="cerrarSesion()">
+          Cerrar Sesi&#243;n
+        </a>
+      </div>
     </div>
   </nav>
   <main class="container is-fluid">

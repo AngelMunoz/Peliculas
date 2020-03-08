@@ -5,23 +5,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
+import { AuthModule } from './auth/auth.module';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PeliculasComponent } from './peliculas/peliculas.component';
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, SearchBarComponent, PeliculasComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
       }
-    })
+    }),
+    AuthModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
