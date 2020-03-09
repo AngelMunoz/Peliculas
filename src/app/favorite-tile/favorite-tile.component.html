@@ -1,0 +1,22 @@
+<div class="card favorite-tile">
+  <header class="card-header">
+    <p class="card-header-title">{{ title }}</p>
+    <div class="card-header-icon">
+      <app-mdi-icon [path]="favoriteIcon" [color]="iconColor" (click)="tapFavorite()">
+      </app-mdi-icon>
+    </div>
+  </header>
+  <div *ngIf="source && !showDetails" class="card-image" (click)="toggleDetails()">
+    <figure class="image is-2by3">
+      <img [src]="source" [alt]="title">
+    </figure>
+  </div>
+  <section *ngIf="showDetails" class="card-content">
+    <div class="content-header">
+      <app-mdi-icon class="close-icon" [path]="closeIcon" color="#3273dc" (click)="toggleDetails()"></app-mdi-icon>
+    </div>
+    <div class="external-content">
+      <ng-content></ng-content>
+    </div>
+  </section>
+</div>

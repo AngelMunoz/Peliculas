@@ -1,0 +1,36 @@
+.favorite-tile {
+  width: 300px;
+  height: 514px;
+  .card-header {
+    height: 4em;
+  }
+  
+  .card-image {
+    cursor: pointer;
+  }
+
+  img {
+    height: 411px;
+    width: 300px
+  }
+
+  .content-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 30px;
+    left: 8.5px;
+  }
+
+  .close-icon {
+    cursor: pointer;
+  }
+
+  .external-content {
+    height: 381px;
+    overflow-y: auto;
+    position: relative;
+    bottom: 30px;
+  }
+}

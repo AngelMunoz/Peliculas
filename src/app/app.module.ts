@@ -10,9 +10,11 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { httpInterceptorProviders } from './http-interceptors';
+import { MdiIconComponent } from './mdi-icon/mdi-icon.component';
+import { FavoriteTileComponent } from './favorite-tile/favorite-tile.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchBarComponent, PeliculasComponent],
+  declarations: [AppComponent, SearchBarComponent, PeliculasComponent, MdiIconComponent, FavoriteTileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
