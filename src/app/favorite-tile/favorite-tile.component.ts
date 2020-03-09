@@ -18,7 +18,13 @@ export class FavoriteTileComponent {
 
   showDetails = false;
   closeIcon = MdiIcons.Close;
-
+  /**
+   * En este caso se usa la propiedad `this.fromSearch`
+   * para determinar cual de las acciones se va a ejecutar
+   * como punto de mejora podriamos dejar *tapFavorite* como
+   * un binding y dejar que el consumidor de este componente decida
+   * cual es la mejor accion.
+   */
   tapFavorite() {
     if (this.fromSearch) {
       this.addToFavorites.emit();

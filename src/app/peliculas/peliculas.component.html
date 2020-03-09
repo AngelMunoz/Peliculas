@@ -36,6 +36,9 @@
       </li>
     </ul>
   </section>
+  <h4 class="subtitle has-text-centered" *ngIf="favoritos.length === 0">
+    Teclea algun titulo en la barra de busqueda para agregar a tus favoritos :)
+  </h4>
   <section class="peliculas__favoritos">
     <app-favorite-tile *ngFor="let favorito of favoritos" [source]="favorito.Poster"
       [title]="favorito.Title + ' - ' + favorito.Year" [favoriteIcon]="icons.Heart" [fromSearch]="false"
