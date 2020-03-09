@@ -1,5 +1,5 @@
 import { createAction, props, createSelector } from '@ngrx/store';
-import { SetFavoritesActionProps, AddFavoriteActionProps, RemoveFavoriteActionProps, PeliculasState, Pelicula, SetSearchResultsActionProps } from 'src/app/models/peliculas.model';
+import { SetFavoritesActionProps, AddFavoriteActionProps, RemoveFavoriteActionProps, PeliculasState, Pelicula, SetSearchResultsActionProps, SelectFavorytesByParamArgs, RemoveFromSearchActionProps, SetFavoritesSortingProps } from 'src/app/models/peliculas.model';
 import { State } from '../reducers';
 
 
@@ -27,6 +27,16 @@ export const removeFavorite = createAction(
   '[Peliculas] removeFavorite',
   props<RemoveFavoriteActionProps>()
 );
+
+export const removeFromSearch = createAction(
+  '[Peliculas] removeFromSearch',
+  props<RemoveFromSearchActionProps>()
+);
+
+export const setFavoritesSorting = createAction(
+  '[Peliculas] setFavoritesSorting',
+  props<SetFavoritesSortingProps>()
+)
 
 export const selectSeries = createSelector(
   (state: State) => state.peliculasState,

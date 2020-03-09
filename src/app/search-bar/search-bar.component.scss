@@ -8,16 +8,16 @@
   flex-direction: row;
   flex-wrap:  wrap;
   justify-content: space-between;
-  @media screen and (max-width: 625px) {
+  @media screen and (max-width: 656px) {
     flex-direction: column;
     align-content: space-between;
   }
 }
 
 .search-field {
-  max-width: 220px;
+  width: 220px;
   margin-right: 1em;
-  @media screen and (max-width: 625px) {
+  @media screen and (max-width: 656px) {
     margin-bottom: 1em;
     width: 220px;
   }
@@ -28,7 +28,10 @@
 
 .select-field {
   margin-right: 1em;
-  @media screen and (max-width: 625px) {
+  select {
+    width: 220px;
+  }
+  @media screen and (max-width: 656px) {
     margin-right: auto;
     margin-bottom: 1em;
     select {
@@ -41,7 +44,7 @@
 }
 
 .button-field {
-  @media screen and (max-width: 625px) {
+  @media screen and (max-width: 656px) {
     width: 220px;
   }
   @media screen and (max-width: 425px) {

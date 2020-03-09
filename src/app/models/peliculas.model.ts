@@ -8,7 +8,6 @@ export interface ResultadoBusqueda {
   Poster: string;
 }
 
-
 export interface Rating {
   Source: string;
   Value: string;
@@ -67,10 +66,12 @@ export interface Serie {
 }
 
 export type Favorito = Pelicula | Serie;
+export type OrdenEstado = 'asc' | 'desc' | 'ninguno';
 
 export interface PeliculasState {
   favoritos: Favorito[];
   resultados: ResultadoBusqueda[];
+  orden: OrdenEstado;
 }
 
 export type SetFavoritesActionProps = {
@@ -87,4 +88,16 @@ export type AddFavoriteActionProps = {
 
 export type RemoveFavoriteActionProps = {
   favorito: Favorito
+};
+
+export type SelectFavorytesByParamArgs = {
+  tipo: SearchTypeValues
+};
+
+export type RemoveFromSearchActionProps = {
+  resultado: ResultadoBusqueda
+};
+
+export type SetFavoritesSortingProps = {
+  orden: OrdenEstado
 };

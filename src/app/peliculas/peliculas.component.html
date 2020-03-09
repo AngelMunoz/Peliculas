@@ -1,11 +1,100 @@
-<p>peliculas works!</p>
-<ul>
-  <li *ngFor="let favorito of favoritos">
-    {{favorito.Title}}
-  </li>
-</ul>
-<ul>
-  <li *ngFor="let resultado of resultados">
-    {{ resultado.Title }} <button (click)="agregarFavorito(resultado)">favorito</button>
-  </li>
-</ul>
+<section class="peliculas">
+  <h3 *ngIf="resultados.length > 0" class="title has-text-centered">
+    Resultados de Busqueda
+  </h3>
+  <section class="peliculas__resultados">
+    <app-favorite-tile *ngFor="let resultado of resultados" [source]="resultado.Poster"
+      [title]="resultado.Title + ' - ' + resultado.Year" [favoriteIcon]="icons.HeartOutline" [fromSearch]="true"
+      (addToFavorites)="agregarFavorito(resultado)">
+      <div>
+        <label class="has-text-grey is-size-5">IMDB ID</label>
+        <br />
+        <p class="is-size-7">{{ resultado.imdbID }}</p>
+      </div>
+    </app-favorite-tile>
+  </section>
+  <hr>
+  <h3 class="title has-text-centered">Mis Favoritos</h3>
+  <section class="tabs is-centered">
+    <ul>
+      <li class="toolbar">
+        <div>Ordenar:</div>
+        <div>
+          <app-mdi-icon (click)="setSorting(estadoOrden)" [path]="iconoOrden"
+            [color]="estadoOrden === 'ninguno' ? '#4a4a4a' : '#3273dc'">
+          </app-mdi-icon>
+        </div>
+      </li>
+      <li (click)="selectTab('all')" [ngClass]="{ 'is-active': selectedTab === 'all' }">
+        <a>Todas</a>
+      </li>
+      <li (click)="selectTab('movie')" [ngClass]="{ 'is-active': selectedTab === 'movie' }">
+        <a>Peliculas</a>
+      </li>
+      <li (click)="selectTab('series')" [ngClass]="{'is-active': selectedTab === 'series' }">
+        <a>Series</a>
+      </li>
+    </ul>
+  </section>
+  <section class="peliculas__favoritos">
+    <app-favorite-tile *ngFor="let favorito of favoritos" [source]="favorito.Poster"
+      [title]="favorito.Title + ' - ' + favorito.Year" [favoriteIcon]="icons.Heart" [fromSearch]="false"
+      (removeFromFavorites)="removerFavorito(favorito)">
+      <div>
+        <label class="has-text-grey is-size-5">IMDB Rating <span class="is-size-7"># Votantes</span></label>
+        <br />
+        <p class="is-size-4">{{ favorito.imdbRating }} <span class="is-size-7">{{favorito.imdbVotes}}</span></p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Actores</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Actors }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Trama</label>
+        <br />
+        <p class="is-size-7">{{favorito.Plot}}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Director</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Director }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Escritores</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Writer }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Genero</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Genre }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Duraci&#243;n</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Runtime }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Fecha de Estreno</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Released }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Clasificaci&#243;n</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Rated }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Idioma</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Language }}</p>
+      </div>
+      <div>
+        <label class="has-text-grey is-size-5">Pa&#237;s de Origen</label>
+        <br />
+        <p class="is-size-7">{{ favorito.Country }}</p>
+      </div>
+    </app-favorite-tile>
+  </section>
+</section>

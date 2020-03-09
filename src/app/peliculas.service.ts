@@ -27,7 +27,7 @@ export class PeliculasService {
   getFromLocalStorage(username: string): PeliculasState {
     const state: PeliculasState = JSON.parse(localStorage.getItem(`${PeliculasStateKey}:${username}`));
     if (state) return state;
-    return { favoritos: [], resultados: [] };
+    return { favoritos: [], resultados: [], orden: 'ninguno' };
   }
 
 }

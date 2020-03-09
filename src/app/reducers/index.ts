@@ -10,22 +10,26 @@ import {
   AppState,
   TitleActionProps,
   AuthenticationActionProps,
-  AppStateKey,
-  PeliculasStateKey
+  AppStateKey
 } from 'src/app/models/app.model';
 import {
   PeliculasState,
   SetFavoritesActionProps,
   AddFavoriteActionProps,
   RemoveFavoriteActionProps,
-  SetSearchResultsActionProps
+  SetSearchResultsActionProps,
+  RemoveFromSearchActionProps,
+  Favorito,
+  SetFavoritesSortingProps,
 } from 'src/app/models/peliculas.model';
 import {
   setFavorites,
   addFavorite,
   removeFavorite,
   setSearchResults,
-  setPeliState
+  setPeliState,
+  removeFromSearch,
+  setFavoritesSorting
 } from '../actions/peliculas.actions';
 
 export interface State {
@@ -56,8 +60,9 @@ const appStateReducer = createReducer(
   )
 );
 
+const initPeliState: PeliculasState = { favoritos: [], resultados: [], orden: 'ninguno' };
 const peliculasStateReducer = createReducer(
-  { favoritos: [], resultados: [] },
+  initPeliState,
   on(
     setPeliState,
     (state, peliState: PeliculasState) =>
@@ -71,7 +76,16 @@ const peliculasStateReducer = createReducer(
   on(
     setSearchResults,
     (state, { resultados }: SetSearchResultsActionProps) =>
-      ({ ...state, resultados: [...resultados] })
+      ({ ...state, resultados: resultados.filter(resultado => !state.favoritos.some((favorito: Favorito) => favorito.imdbID === resultado.imdbID)) })
+  ),
+  on(
+    removeFromSearch,
+    (state, { resultado }: RemoveFromSearchActionProps) =>
+      ({ ...state, resultados: state.resultados.filter(r => r.imdbID !== resultado.imdbID) })
+  ),
+  on(
+    setFavoritesSorting,
+    (state, { orden }: SetFavoritesSortingProps) => ({ ...state, orden })
   ),
   on(
     addFavorite,
