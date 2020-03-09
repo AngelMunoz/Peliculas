@@ -70,7 +70,7 @@ export class PeliculasComponent implements OnInit, OnDestroy {
   }
 
   get selectedTab() {
-    return this.selectedTab;
+    return this._selectedTab;
   }
 
   ngOnDestroy(): void {
