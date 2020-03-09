@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginPayload, AuthResponse } from '../models/auth.model';
-import { AppState, AppStateKey } from '../models/app.model';
+import { LoginPayload, AuthResponse, AppState } from 'src/app/models';
+import { AppStateKey } from 'src/app/utils';
 
 @Injectable({
   providedIn: 'root'

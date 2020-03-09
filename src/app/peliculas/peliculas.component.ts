@@ -4,14 +4,14 @@ import { State } from '../reducers';
 import { Store, select } from '@ngrx/store';
 import { PeliculasService } from '../peliculas.service';
 import { first } from 'rxjs/operators';
-import { SearchTypeValues } from '../models/search-bar.model';
-import { MdiIcons } from '../models/icons.enum';
 import {
-  Favorito,
-  ResultadoBusqueda,
+  SearchTypeValues,
+  MdiIcons,
+  OrdenEstado,
   PeliculasState,
-  OrdenEstado
-} from '../models/peliculas.model';
+  Favorito,
+  ResultadoBusqueda
+} from 'src/app/models';
 import {
   selectAllFavorites,
   selectSearchResults,

@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Favorito, ResultadoBusqueda } from '../models/peliculas.model';
-import { MdiIcons } from '../models/icons.enum';
+import { MdiIcons } from 'src/app/models';
 
 @Component({
   selector: 'app-favorite-tile',

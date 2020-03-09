@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/cor
 import { of, Subscription } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { OnSearchEventArgs } from 'src/app/models/search-bar.model';
+import { OnSearchEventArgs } from 'src/app/models';
 
 @Component({
   selector: 'app-search-bar',

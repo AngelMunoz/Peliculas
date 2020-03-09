@@ -1,4 +1,5 @@
-export type SearchTypeValues = 'movie' | 'series';
+import { SearchTypeValues } from './types';
+
 export interface OnSearchEventArgs {
   search: string;
   type: SearchTypeValues;

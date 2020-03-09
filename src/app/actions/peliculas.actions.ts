@@ -1,6 +1,6 @@
 import { createAction, props, createSelector } from '@ngrx/store';
-import { SetFavoritesActionProps, AddFavoriteActionProps, RemoveFavoriteActionProps, PeliculasState, Pelicula, SetSearchResultsActionProps, SelectFavorytesByParamArgs, RemoveFromSearchActionProps, SetFavoritesSortingProps } from 'src/app/models/peliculas.model';
-import { State } from '../reducers';
+import { SetFavoritesActionProps, AddFavoriteActionProps, RemoveFavoriteActionProps, PeliculasState, Pelicula, SetSearchResultsActionProps, SelectFavorytesByParamArgs, RemoveFromSearchActionProps, SetFavoritesSortingProps } from 'src/app/models';
+import { State } from 'src/app/reducers';
 
 
 export const setPeliState = createAction(

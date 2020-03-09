@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { SearchTypeValues } from './models/search-bar.model';
-import { ResultadoBusqueda, Favorito, PeliculasState } from './models/peliculas.model';
-import { PeliculasStateKey } from './models/app.model';
+import { PeliculasStateKey } from 'src/app/utils';
+import {
+  SearchTypeValues,
+  ResultadoBusqueda,
+  Favorito,
+  PeliculasState
+} from 'src/app/models';
 
 @Injectable({
   providedIn: 'root'

@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth-service.service';
-import { LoginPayload } from 'src/app/models/auth.model';
+import { LoginPayload, AppState } from 'src/app/models';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/reducers';
 import { setAuthentication } from 'src/app/actions/app.actions';
-import { AppState } from 'src/app/models/app.model';
 import { Subscription } from 'rxjs';
 
 @Component({

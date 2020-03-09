@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { AuthService } from './auth/auth-service.service';
 import { of } from 'rxjs';
-import { AuthResponse } from './models/auth.model';
+import { AuthResponse } from 'src/app/models';
 import { environment } from 'src/environments/environment';
 
 @Injectable()

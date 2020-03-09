@@ -10,18 +10,15 @@ import {
   AppState,
   TitleActionProps,
   AuthenticationActionProps,
-  AppStateKey
-} from 'src/app/models/app.model';
-import {
   PeliculasState,
   SetFavoritesActionProps,
+  SetSearchResultsActionProps,
+  Favorito,
+  RemoveFromSearchActionProps,
+  SetFavoritesSortingProps,
   AddFavoriteActionProps,
   RemoveFavoriteActionProps,
-  SetSearchResultsActionProps,
-  RemoveFromSearchActionProps,
-  Favorito,
-  SetFavoritesSortingProps,
-} from 'src/app/models/peliculas.model';
+} from 'src/app/models';
 import {
   setFavorites,
   addFavorite,
@@ -30,7 +27,8 @@ import {
   setPeliState,
   removeFromSearch,
   setFavoritesSorting
-} from '../actions/peliculas.actions';
+} from 'src/app/actions/peliculas.actions';
+import { AppStateKey } from 'src/app/utils';
 
 export interface State {
   appState: AppState,

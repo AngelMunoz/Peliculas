@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { State } from './reducers';
+import { Component, OnDestroy } from '@angular/core';
+import { State } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
-import { Subscription, of } from 'rxjs';
-import { AppState } from './models/app.model';
+import { Subscription } from 'rxjs';
+import { AppState, OnSearchEventArgs } from 'src/app/models';
 import { AuthService } from './auth/auth-service.service';
 import { PeliculasService } from './peliculas.service';
-import { OnSearchEventArgs } from './models/search-bar.model';
 import { setSearchResults } from './actions/peliculas.actions';
 
 @Component({

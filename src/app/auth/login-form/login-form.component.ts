@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { LoginPayload } from 'src/app/models/auth.model';
+import { LoginPayload } from 'src/app/models';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
