@@ -2,26 +2,37 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Prerrequisitos
 
-## Code scaffolding
+- Nodejs LTS o superior
+- angular cli
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Iniciar de forma local
 
-## Build
+- npm run start
+o
+- ng serve
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+visitar http://localhost:4200 en el navegador
+para ver este demo funcionando en la web puede visitar [Este sitio](https://peliculas-1716a.web.app/)
+el cual utiliza firebase para el *Hosting*
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Resumen
+El sitio web consta de dos secciones sencillas
+- Contenido del sitio
+- Barra de busqueda
 
-## Running end-to-end tests
+La barra de busqueda se comunica con el [componente principal](./src/app/app.component.ts) de la aplicación (por medio de eventos) el cual se encarga de llamar al servicio que solicita los datos al API. Una vez realizada la busqueda los resultados son comunicados con el [contenido](./src/app/peliculas/peliculas.component.ts) por medio de un por medio de un [global store](./src/app/reducers/index.ts) usando la librería [@ngrx/store](https://ngrx.io/)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Al darle click al icono de favoritos en algún resultado de la busqueda este es agregado al store global donde se almacena cuales son las películas/series favoritas del usuario. Los resultados que ya se encuentran en favoritos son filtrados de los resultados de la busqueda.
 
-## Further help
+Los resultados de la busqueda/favoritos se muestran al usuario usando un componente llamado [`favorite-tile`](./src/app/favorite-tile/favorite-tile.component.ts), este componente expone un "slot" donde si bien se le da una forma general a el marco del contenido, se puede colocar contenido arbitrario dentro de dicho componente, Se puede observar dicho comportamiento al darle click a la imagen que esta dentro del `favorite-tile` y comparar el contenido de un resultado de busqueda y un favorito; El favorito despliega la información completa de la película o serie, mientras que el resultado de la busqueda solo muestra el imbd id.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+# Extras
+En el código/archivos y directorios se pueden encontrar comentarios o archivos README que explican ciertos detalles de implementación o incluso puntos de mejora observados despues de un análisis bastante sencillo.
+
+
+
