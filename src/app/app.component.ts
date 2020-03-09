@@ -15,7 +15,7 @@ import { setSearchResults } from './actions/peliculas.actions';
 export class AppComponent implements OnDestroy {
   appState: AppState;
   isMenuOpen = false;
-  private _sub: Subscription = this.store.select(state => state.appState).subscribe({ next: state => this.setAppState(state) });
+  private sub: Subscription = this.store.select(state => state.appState).subscribe({ next: state => this.setAppState(state) });
 
   hamburgerBtnClasses = ['navbar-burger', 'hamburger'];
   navbarMenuClasses = ['navbar-menu'];
@@ -26,7 +26,7 @@ export class AppComponent implements OnDestroy {
     private readonly peliculas: PeliculasService) { }
 
   ngOnDestroy(): void {
-    this._sub?.unsubscribe();
+    this.sub?.unsubscribe();
   }
 
   setAppState(state: AppState) {
@@ -53,7 +53,7 @@ export class AppComponent implements OnDestroy {
     try {
       const { Response, Search } = await this.peliculas.search(search, type);
       if (Response === 'True') {
-        this.store.dispatch(setSearchResults({ resultados: Search }))
+        this.store.dispatch(setSearchResults({ resultados: Search }));
       } else {
         this.store.dispatch(setSearchResults({ resultados: [] }));
       }

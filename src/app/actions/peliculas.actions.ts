@@ -1,5 +1,13 @@
 import { createAction, props, createSelector } from '@ngrx/store';
-import { SetFavoritesActionProps, AddFavoriteActionProps, RemoveFavoriteActionProps, PeliculasState, Pelicula, SetSearchResultsActionProps, SelectFavorytesByParamArgs, RemoveFromSearchActionProps, SetFavoritesSortingProps } from 'src/app/models';
+import {
+  SetFavoritesActionProps,
+  AddFavoriteActionProps,
+  RemoveFavoriteActionProps,
+  PeliculasState,
+  SetSearchResultsActionProps,
+  RemoveFromSearchActionProps,
+  SetFavoritesSortingProps
+} from 'src/app/models';
 import { State } from 'src/app/reducers';
 
 
@@ -36,7 +44,7 @@ export const removeFromSearch = createAction(
 export const setFavoritesSorting = createAction(
   '[Peliculas] setFavoritesSorting',
   props<SetFavoritesSortingProps>()
-)
+);
 
 export const selectSeries = createSelector(
   (state: State) => state.peliculasState,

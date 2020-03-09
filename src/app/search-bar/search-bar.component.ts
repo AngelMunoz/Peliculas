@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { of, Subscription } from 'rxjs'
-import { debounceTime } from 'rxjs/operators'
+import { of, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { OnSearchEventArgs } from 'src/app/models';
 
@@ -11,7 +11,7 @@ import { OnSearchEventArgs } from 'src/app/models';
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   @Output()
-  onSearch: EventEmitter<OnSearchEventArgs> = new EventEmitter<OnSearchEventArgs>();
+  search: EventEmitter<OnSearchEventArgs> = new EventEmitter<OnSearchEventArgs>();
 
   lookAheadSearch: Subscription;
   searchForm = new FormGroup({
@@ -23,7 +23,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.lookAheadSearch = this.query.valueChanges
       .pipe(debounceTime(750))
-      .subscribe({ next: (value: string) => this.search(value) });
+      .subscribe({ next: (value: string) => this.emitSearch(value) });
   }
 
   ngOnDestroy(): void {
@@ -38,8 +38,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     return this.searchForm.get('searchType');
   }
 
-  search(value: string) {
-    this.onSearch.emit({ search: value, type: this.searchType.value });
+  emitSearch(value: string) {
+    this.search.emit({ search: value, type: this.searchType.value });
   }
 
 }

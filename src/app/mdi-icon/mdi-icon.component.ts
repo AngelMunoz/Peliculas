@@ -9,6 +9,6 @@ import { Component, Input } from '@angular/core';
   `
 })
 export class MdiIconComponent {
-  @Input('path') data: string = '';
-  @Input('color') color: string = 'black';
+  @Input() data = '';
+  @Input() color = 'black';
 }

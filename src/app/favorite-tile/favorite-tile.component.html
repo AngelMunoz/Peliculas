@@ -2,7 +2,7 @@
   <header class="card-header">
     <p class="card-header-title">{{ title }}</p>
     <div class="card-header-icon">
-      <app-mdi-icon [path]="favoriteIcon" [color]="iconColor" (click)="tapFavorite()">
+      <app-mdi-icon [data]="favoriteIcon" [color]="iconColor" (click)="tapFavorite()">
       </app-mdi-icon>
     </div>
   </header>
@@ -13,7 +13,7 @@
   </div>
   <section *ngIf="showDetails" class="card-content">
     <div class="content-header">
-      <app-mdi-icon class="close-icon" [path]="closeIcon" color="#3273dc" (click)="toggleDetails()"></app-mdi-icon>
+      <app-mdi-icon class="close-icon" [data]="closeIcon" color="#3273dc" (click)="toggleDetails()"></app-mdi-icon>
     </div>
     <div class="external-content">
       <ng-content></ng-content>

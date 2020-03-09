@@ -30,10 +30,11 @@ import {
   styleUrls: ['./peliculas.component.scss']
 })
 export class PeliculasComponent implements OnInit, OnDestroy {
-  private _resultados = this.store.pipe(select(selectSearchResults)).subscribe({ next: resultados => this.setResultados(resultados) });
-  private _peliState = this.store.select(state => state.peliculasState).subscribe({ next: state => this.setPeliState(state) });
-  private _favoritos = this.store.pipe(select(selectAllFavorites)).subscribe({ next: favoritos => this.setFavoritos(favoritos) });
+  private resultadosSub = this.store.pipe(select(selectSearchResults)).subscribe({ next: resultados => this.setResultados(resultados) });
+  private peliStateSub = this.store.select(state => state.peliculasState).subscribe({ next: state => this.setPeliState(state) });
+  private favoritosSub = this.store.pipe(select(selectAllFavorites)).subscribe({ next: favoritos => this.setFavoritos(favoritos) });
 
+  // tslint:disable-next-line: variable-name
   private _selectedTab: SearchTypeValues | 'all' = 'movie';
   readonly icons = {
     Heart: MdiIcons.Heart,
@@ -69,18 +70,18 @@ export class PeliculasComponent implements OnInit, OnDestroy {
   }
 
   get selectedTab() {
-    return this._selectedTab;
+    return this.selectedTab;
   }
 
   ngOnDestroy(): void {
-    this._resultados?.unsubscribe();
-    this._peliState?.unsubscribe();
-    this._favoritos?.unsubscribe();
+    this.resultadosSub?.unsubscribe();
+    this.peliStateSub?.unsubscribe();
+    this.favoritosSub?.unsubscribe();
   }
 
   async agregarFavorito(resultado: ResultadoBusqueda) {
     try {
-      if (this.favoritos.findIndex(favorito => favorito.imdbID === resultado.imdbID) !== -1) { return; }
+      if (this.favoritos.findIndex(fav => fav.imdbID === resultado.imdbID) !== -1) { return; }
       const favorito = await this.peliculas.getMediaFromId(resultado.imdbID);
       this.store.dispatch(addFavorite({ favorito }));
       this.store.dispatch(removeFromSearch({ resultado }));
@@ -94,7 +95,7 @@ export class PeliculasComponent implements OnInit, OnDestroy {
   }
 
   setPeliState(state: PeliculasState) {
-    this.peliState = { ...state }
+    this.peliState = { ...state };
     this.estadoOrden = this.peliState.orden;
     if (this.peliState.orden === 'ninguno') {
       this.iconoOrden = MdiIcons.OrdenAZNoOrden;
@@ -122,7 +123,7 @@ export class PeliculasComponent implements OnInit, OnDestroy {
     } else if (this.peliState.orden === 'desc') {
       res = ordenarFavoritosAzDesc(res);
     }
-    const nourl = (title) => `https://via.placeholder.com/300x411.webp?text=${title}`
+    const nourl = (title) => `https://via.placeholder.com/300x411.webp?text=${title}`;
     this.favoritos = res.map(favorito => ({
       ...favorito,
       Poster: favorito.Poster === 'N/A' ? nourl(favorito.Title) : favorito.Poster
@@ -130,7 +131,7 @@ export class PeliculasComponent implements OnInit, OnDestroy {
   }
 
   setResultados(resultados: ResultadoBusqueda[]) {
-    const nourl = (title) => `https://via.placeholder.com/300x411.webp?text=${title}`
+    const nourl = (title) => `https://via.placeholder.com/300x411.webp?text=${title}`;
     this.resultados = resultados.map(resultado => ({
       ...resultado,
       Poster: resultado.Poster === 'N/A' ? nourl(resultado.Title) : resultado.Poster
@@ -150,16 +151,16 @@ export class PeliculasComponent implements OnInit, OnDestroy {
 
   selectTab(tab: SearchTypeValues | 'all') {
     this._selectedTab = tab;
-    this._favoritos?.unsubscribe();
+    this.favoritosSub?.unsubscribe();
     switch (tab) {
       case 'all':
-        this._favoritos = this.store.pipe(select(selectAllFavorites)).subscribe(favoritos => this.setFavoritos([...favoritos]));
+        this.favoritosSub = this.store.pipe(select(selectAllFavorites)).subscribe(favoritos => this.setFavoritos([...favoritos]));
         return;
       case 'movie':
-        this._favoritos = this.store.pipe(select(selectMovies)).subscribe(favoritos => this.setFavoritos([...favoritos]));
+        this.favoritosSub = this.store.pipe(select(selectMovies)).subscribe(favoritos => this.setFavoritos([...favoritos]));
         return;
       case 'series':
-        this._favoritos = this.store.pipe(select(selectSeries)).subscribe(favoritos => this.setFavoritos([...favoritos]));
+        this.favoritosSub = this.store.pipe(select(selectSeries)).subscribe(favoritos => this.setFavoritos([...favoritos]));
         return;
     }
   }

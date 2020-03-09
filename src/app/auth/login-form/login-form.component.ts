@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginFormComponent {
 
-  @Output() onLogin: EventEmitter<LoginPayload> = new EventEmitter();
+  @Output() login: EventEmitter<LoginPayload> = new EventEmitter();
 
   loginForm = new FormGroup({
     email: new FormControl('', { validators: [Validators.required] }),
@@ -24,7 +24,7 @@ export class LoginFormComponent {
   }
 
   onSubmit() {
-    const value = { ...this.loginForm.value }
-    this.onLogin.emit(value);
+    const value = { ...this.loginForm.value };
+    this.login.emit(value);
   }
 }

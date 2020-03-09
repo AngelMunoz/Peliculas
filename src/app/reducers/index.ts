@@ -31,14 +31,14 @@ import {
 import { AppStateKey } from 'src/app/utils';
 
 export interface State {
-  appState: AppState,
-  peliculasState: PeliculasState
+  appState: AppState;
+  peliculasState: PeliculasState;
 }
 
 const getInitialAppState: () => AppState = () => {
   const initialState: AppState = { title: 'Peliculas', username: null, apikey: null, authenticated: false };
   try {
-    const appstate = sessionStorage.getItem(AppStateKey)
+    const appstate = sessionStorage.getItem(AppStateKey);
     return JSON.parse(appstate) || initialState;
   } catch (error) {
     console.warn(`Unable to parse previous state: ${error.message}`);
@@ -73,8 +73,11 @@ const peliculasStateReducer = createReducer(
   ),
   on(
     setSearchResults,
-    (state, { resultados }: SetSearchResultsActionProps) =>
-      ({ ...state, resultados: resultados.filter(resultado => !state.favoritos.some((favorito: Favorito) => favorito.imdbID === resultado.imdbID)) })
+    (state, { resultados }: SetSearchResultsActionProps) => ({
+      ...state,
+      resultados: resultados.filter(resultado =>
+        !state.favoritos.some((favorito: Favorito) => favorito.imdbID === resultado.imdbID))
+    })
   ),
   on(
     removeFromSearch,
@@ -95,7 +98,7 @@ const peliculasStateReducer = createReducer(
     (state, { favorito }: RemoveFavoriteActionProps) =>
       ({ ...state, favoritos: state.favoritos.filter(f => f.imdbID !== favorito.imdbID) })
   )
-)
+);
 
 export const reducers: ActionReducerMap<State> = {
   appState: appStateReducer,

@@ -4,9 +4,9 @@ import { environment } from 'src/environments/environment';
 import { PeliculasStateKey } from 'src/app/utils';
 import {
   SearchTypeValues,
-  ResultadoBusqueda,
   Favorito,
-  PeliculasState
+  PeliculasState,
+  RespuestaResultadoBusqueda
 } from 'src/app/models';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class PeliculasService {
   constructor(private readonly http: HttpClient) { }
 
   search(search: string, type: SearchTypeValues = 'movie') {
-    return this.http.get<{ Response: "True" | "False", Search: ResultadoBusqueda[], totalResults: string }>(`${environment.baseUrl}/?s=${encodeURIComponent(search)}&type=${type}`).toPromise();
+    return this.http.get<RespuestaResultadoBusqueda>(`${environment.baseUrl}/?s=${encodeURIComponent(search)}&type=${type}`).toPromise();
   }
 
   getMediaFromId(id: string) {
@@ -30,7 +30,7 @@ export class PeliculasService {
 
   getFromLocalStorage(username: string): PeliculasState {
     const state: PeliculasState = JSON.parse(localStorage.getItem(`${PeliculasStateKey}:${username}`));
-    if (state) return state;
+    if (state) { return state; }
     return { favoritos: [], resultados: [], orden: 'ninguno' };
   }
 

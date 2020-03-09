@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class AuthPageComponent implements OnInit, OnDestroy {
 
   private appState: AppState;
-  private _sub: Subscription;
+  private sub: Subscription;
 
   constructor(
     private readonly auth: AuthService,
@@ -27,11 +27,11 @@ export class AuthPageComponent implements OnInit, OnDestroy {
       this.router.navigate(['/peliculas']);
       return;
     }
-    this._sub = this.store.select(state => state.appState).subscribe({ next: state => this.appState = state });
+    this.sub = this.store.select(state => state.appState).subscribe({ next: state => this.appState = state });
   }
 
   ngOnDestroy(): void {
-    this._sub?.unsubscribe();
+    this.sub?.unsubscribe();
   }
 
   async tryLogin(payload: LoginPayload) {

@@ -7,17 +7,17 @@ import { MdiIcons } from 'src/app/models';
   styleUrls: ['./favorite-tile.component.scss']
 })
 export class FavoriteTileComponent {
-  @Input('source') source: string = '';
-  @Input('title') title: string = '';
-  @Input('fromSearch') fromSearch = false;
-  @Input('favoriteIcon') favoriteIcon = '';
-  @Input('iconColor') iconColor = 'red';
+  @Input() source = '';
+  @Input() title = '';
+  @Input() fromSearch = false;
+  @Input() favoriteIcon = '';
+  @Input() iconColor = 'red';
 
   @Output() addToFavorites = new EventEmitter<void>();
   @Output() removeFromFavorites = new EventEmitter<void>();
 
   showDetails = false;
-  closeIcon = MdiIcons.Close
+  closeIcon = MdiIcons.Close;
 
   tapFavorite() {
     if (this.fromSearch) {

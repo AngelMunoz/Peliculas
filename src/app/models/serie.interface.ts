@@ -16,7 +16,7 @@ export interface Serie {
   Country: string;
   Awards: string;
   Poster: string;
-  Ratings: Rating[],
+  Ratings: Rating[];
   Metascore: string;
   imdbRating: string;
   imdbVotes: string;
