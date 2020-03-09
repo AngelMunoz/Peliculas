@@ -2,7 +2,7 @@
   <nav class="navbar is-fixed-bottom is-dark">
     <section class="navbar-brand">
       <a [routerLink]="'/'" class="navbar-item">Peliculas</a>
-      <app-search-bar *ngIf="appState.authenticated" (onSearch)="onSearch($event)"></app-search-bar>
+      <app-search-bar *ngIf="appState.authenticated" (search)="onSearch($event)"></app-search-bar>
       <a role="button" [ngClass]="hamburgerBtnClasses" (click)="toggleMenu()">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
